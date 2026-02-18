@@ -1,0 +1,3822 @@
+/* 单词地下城 - 完全重设计样式 */
+
+/* ========== 基础样式 ========== */
+.dungeon-container {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.dungeon-home {
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========== 模式选择 ========== */
+.section-title-new {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+.mode-grid-new {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.mode-card-new {
+    background: var(--bg-card);
+    border: 2px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-card-new::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mode-card-new:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+}
+
+.mode-card-new:hover::before {
+    opacity: 1;
+}
+
+.mode-card-new.selected {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+}
+
+.mode-card-new.selected::before {
+    opacity: 1;
+}
+
+.mode-icon-new {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.mode-name-new {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.mode-desc-new {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.mode-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.feature-tag {
+    padding: 6px 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.mode-difficulty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.difficulty-select {
+    padding: 8px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.difficulty-select:hover {
+    border-color: var(--accent);
+}
+
+/* ========== 职业选择 ========== */
+.class-grid-new {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.class-card-new {
+    background: var(--bg-card);
+    border: 2px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.class-card-new:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.12);
+}
+
+.class-card-new.selected {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.class-icon-wrapper-new {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.class-icon-new {
+    font-size: 2rem;
+}
+
+.class-rarity-badge-new {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.class-rarity-badge-new.legendary {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.15) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+}
+
+.class-rarity-badge-new.epic {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(168, 85, 247, 0.15) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: #a855f7;
+}
+
+.class-rarity-badge-new.rare {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+.class-rarity-badge-new.common {
+    background: rgba(148, 163, 184, 0.15);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    color: #94a3b8;
+}
+
+.class-name-new {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.class-desc-new {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.class-stats-new {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.class-stat-new {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-label-new {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-value-new {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.class-passive-new {
+    padding: 10px 12px;
+    background: rgba(59, 130, 246, 0.06);
+    border: 1px solid rgba(59, 130, 246, 0.12);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.class-unique-new {
+    margin-top: 12px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 8px;
+}
+
+.unique-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #a855f7;
+    margin-bottom: 4px;
+}
+
+.unique-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* ========== 开始按钮 ========== */
+.start-section-new {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-start-new {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 48px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-start-new:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+}
+
+.btn-start-new .btn-icon {
+    font-size: 1.5rem;
+}
+
+/* ========== 地图界面 ========== */
+.dungeon-map-new {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 32px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.map-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.floor-display {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.mode-display {
+    padding: 6px 14px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--accent);
+}
+
+.map-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-icon-only {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-icon-only:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+}
+
+.map-container {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+}
+
+.map-path {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.map-floor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.map-floor.current-floor {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+}
+
+.map-floor.completed-floor {
+    opacity: 0.6;
+}
+
+.map-floor.locked-floor {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.floor-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 4px 16px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+}
+
+.current-floor .floor-label {
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.floor-rooms {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.map-room {
+    width: 100px;
+    height: 100px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.map-room.selectable {
+    cursor: pointer;
+}
+
+.map-room.selectable:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+}
+
+.map-room.selected {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.map-room.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.map-room.encounter { border-color: #ef4444; }
+.map-room.elite_encounter { border-color: #a855f7; }
+.map-room.boss { border-color: #fbbf24; background: rgba(251, 191, 36, 0.05); }
+.map-room.camp { border-color: #10b981; }
+.map-room.merchant { border-color: #3b82f6; }
+.map-room.special { border-color: #8b5cf6; }
+.map-room.reward { border-color: #f59e0b; }
+
+.room-icon {
+    font-size: 1.75rem;
+    margin-bottom: 4px;
+}
+
+.room-name {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.player-status-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 16px 32px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.status-hp, .status-gold, .status-deck {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-icon {
+    font-size: 1.25rem;
+}
+
+.status-bar {
+    width: 120px;
+    height: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.status-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.status-bar-fill.hp {
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.status-value {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ========== 战斗界面 ========== */
+.battle-screen-new {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+}
+
+.battle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 32px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.player-status, .enemy-status {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-avatar, .enemy-avatar {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.enemy-avatar {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
+}
+
+.player-info, .enemy-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.player-name, .enemy-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hp-bar {
+    width: 200px;
+    height: 12px;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.hp-bar.enemy-hp .hp-bar-fill {
+    background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+}
+
+.hp-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.energy-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.energy-orbs {
+    display: flex;
+    gap: 4px;
+}
+
+.energy-orb {
+    width: 16px;
+    height: 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.energy-orb.active {
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border-color: transparent;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.energy-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.battle-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.floor-indicator {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.turn-indicator {
+    padding: 6px 16px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.enemy-intent {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+}
+
+.intent-icon {
+    font-size: 1rem;
+}
+
+.intent-value {
+    font-size: 0.875rem;
+    color: #fca5a5;
+    font-weight: 600;
+}
+
+.battle-main {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    min-height: 0;
+}
+
+.battle-field {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-field, .enemy-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.summon-zone {
+    display: flex;
+    gap: 8px;
+}
+
+.summon {
+    width: 48px;
+    height: 48px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.enemy-effects {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.enemy-effect {
+    padding: 4px 10px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #c4b5fd;
+}
+
+.battle-log {
+    width: 280px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.log-entry {
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.log-entry.damage {
+    background: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+}
+
+.log-entry.heal {
+    background: rgba(16, 185, 129, 0.1);
+    color: #6ee7b7;
+}
+
+.log-entry.special {
+    background: rgba(139, 92, 246, 0.1);
+    color: #c4b5fd;
+}
+
+/* ========== 手牌区域 ========== */
+.hand-section {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+    padding: 16px 24px;
+}
+
+.hand-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.hand-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hand-count {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.deck-info {
+    display: flex;
+    gap: 16px;
+    margin-left: auto;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.hand-cards {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 8px 0;
+    min-height: 180px;
+}
+
+.hand-cards::-webkit-scrollbar {
+    height: 6px;
+}
+
+.hand-cards::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 3px;
+}
+
+/* ========== 卡牌样式 ========== */
+.battle-card {
+    flex-shrink: 0;
+    width: 140px;
+    height: 175px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.battle-card:hover:not(.disabled) {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+}
+
+.battle-card.selected {
+    transform: translateY(-16px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 48px rgba(59, 130, 246, 0.3);
+}
+
+.battle-card.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* 卡牌能量消耗 */
+.card-cost-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+    z-index: 2;
+}
+
+/* 卡牌稀有度边框 */
+.battle-card.rarity-common {
+    border-color: #64748b;
+}
+
+.battle-card.rarity-rare {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+}
+
+.battle-card.rarity-epic {
+    border-color: #8b5cf6;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 100%);
+}
+
+.battle-card.rarity-legendary {
+    border-color: #fbbf24;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, transparent 100%);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+}
+
+/* 卡牌内容 */
+.card-content {
+    flex: 1;
+    padding: 40px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-word {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.card-translation {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.2;
+}
+
+.card-effect-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 8px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.card-effect-desc {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+    line-height: 1.3;
+    text-align: center;
+}
+
+/* 卡牌底部稀有度标签 */
+.card-rarity-footer {
+    padding: 6px;
+    text-align: center;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.battle-card.rarity-common .card-rarity-footer {
+    background: rgba(100, 116, 139, 0.1);
+    color: #94a3b8;
+}
+
+.battle-card.rarity-rare .card-rarity-footer {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+}
+
+.battle-card.rarity-epic .card-rarity-footer {
+    background: rgba(139, 92, 246, 0.1);
+    color: #a78bfa;
+}
+
+.battle-card.rarity-legendary .card-rarity-footer {
+    background: rgba(251, 191, 36, 0.1);
+    color: #fcd34d;
+}
+
+/* ========== 战斗操作按钮 ========== */
+.battle-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 24px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.btn-action {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+.btn-action.secondary {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.btn-action.secondary:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+}
+
+/* ========== 奖励界面 ========== */
+.reward-screen-new, .shop-screen-new, .special-room-new, .camp-screen-new, .victory-screen-new, .gameover-screen-new {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.reward-overlay, .victory-overlay, .gameover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+.reward-container, .victory-container, .gameover-container {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.reward-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.reward-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.reward-option {
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.reward-option:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.reward-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.reward-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.reward-desc {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.btn-skip-reward {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-skip-reward:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ========== 商店界面 ========== */
+.shop-screen-new {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.shop-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.player-gold {
+    font-size: 1.25rem;
+    color: #fbbf24;
+    font-weight: 600;
+}
+
+.shop-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.shop-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shop-item:hover:not(.sold-out) {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.shop-item.sold-out {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.item-icon {
+    font-size: 2rem;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.item-desc {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.item-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+.btn-leave-shop {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-leave-shop:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+}
+
+/* ========== 营地界面 ========== */
+.camp-screen-new {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.camp-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.camp-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.camp-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.camp-option {
+    padding: 24px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.camp-option:hover {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.camp-option .option-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.camp-option .option-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.camp-option .option-desc {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    display: block;
+}
+
+.btn-leave-camp {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-leave-camp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+/* ========== 通关界面 ========== */
+.victory-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.victory-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 8px;
+}
+
+.victory-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
+
+.victory-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-item {
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-item .stat-label {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.stat-item .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.victory-achievements {
+    margin-bottom: 24px;
+}
+
+.victory-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-victory {
+    flex: 1;
+    padding: 14px;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    border: none;
+    border-radius: 10px;
+    color: #1e1b4b;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-victory:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+}
+
+.btn-victory.secondary {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+/* ========== 游戏结束界面 ========== */
+.gameover-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ef4444;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.gameover-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.gameover-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.gameover-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-gameover {
+    flex: 1;
+    padding: 14px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-gameover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+}
+
+.btn-gameover.secondary {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+/* ========== 特殊房间 ========== */
+.special-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.special-content {
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.special-question {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.special-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+.special-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.special-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.special-option {
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.special-option:hover {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 1200px) {
+    .class-grid-new {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .mode-grid-new {
+        grid-template-columns: 1fr;
+    }
+    
+    .class-grid-new {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .reward-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .victory-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dungeon-home {
+        padding: 20px;
+    }
+    
+    .class-grid-new {
+        grid-template-columns: 1fr;
+    }
+    
+    .camp-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .shop-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .battle-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .hp-bar {
+        width: 150px;
+    }
+}
+
+/* ========== 游戏内悬浮菜单 ========== */
+.game-menu-btn {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+    transition: all 0.3s ease;
+}
+
+.game-menu-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(59, 130, 246, 0.5);
+}
+
+.game-menu-panel {
+    position: fixed;
+    top: 140px;
+    right: 20px;
+    width: 220px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.game-menu-panel.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-panel-content {
+    padding: 8px;
+}
+
+.menu-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 8px;
+}
+
+.menu-panel-header span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.menu-close-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.menu-close-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.menu-panel-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-item-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.menu-item-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent);
+}
+
+/* ========== 背包面板 ========== */
+.inventory-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
+    z-index: 1002;
+    overflow: hidden;
+    display: none;
+}
+
+.inventory-panel.show {
+    display: block;
+}
+
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.inventory-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.inventory-close-btn {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.inventory-close-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.inventory-content {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.inventory-section {
+    margin-bottom: 24px;
+}
+
+.inventory-section-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.inventory-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 12px;
+}
+
+.inventory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.inventory-item-icon {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.inventory-item-name {
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.inventory-item-count {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+}
+
+/* ========== 卡组选择 ========== */
+.deck-selection-section {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+}
+
+.deck-selection-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.deck-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.deck-card {
+    padding: 20px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.deck-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+}
+
+.deck-card.selected {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.deck-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.deck-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.deck-card-desc {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.deck-card-preview {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.deck-card-preview .mini-card {
+    width: 24px;
+    height: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+}
+
+.deck-card-count {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+}
+
+.deck-custom-section {
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+}
+
+.deck-custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.deck-custom-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.deck-custom-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.deck-custom-btn {
+    padding: 6px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.deck-custom-btn:hover {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.deck-custom-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 60px;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 8px;
+}
+
+.deck-custom-card {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+}
+
+.deck-custom-card .remove-card {
+    width: 16px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.deck-custom-card .remove-card:hover {
+    color: #ef4444;
+}
+
+/* ========== 市场页面 ========== */
+.market-section {
+    padding: 20px;
+}
+
+.market-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.market-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.market-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    border-radius: 10px;
+}
+
+.market-score-icon {
+    font-size: 1.25rem;
+}
+
+.market-score-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+.market-refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.market-refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+.market-refresh-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.market-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.market-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+}
+
+.market-card.sold {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.market-card-rarity {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.market-card-rarity.common {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94a3b8;
+}
+
+.market-card-rarity.rare {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.market-card-rarity.epic {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+.market-card-rarity.legendary {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+}
+
+.market-card-word {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.market-card-phonetic {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.market-card-effect {
+    padding: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.market-card-effect-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 2px;
+}
+
+.market-card-effect-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.market-card-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+.market-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.market-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+/* ========== 音效相关 ========== */
+.sound-indicator {
+    position: fixed;
+    top: 20px;
+    right: 80px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    z-index: 1003;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.sound-indicator.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sound-indicator.on {
+    color: #10b981;
+}
+
+.sound-indicator.off {
+    color: #ef4444;
+}
+
+/* ========== 存档槽对话框 ========== */
+.save-slot-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1003;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.save-slot-dialog.show {
+    display: flex;
+}
+
+.save-slot-content {
+    width: 90%;
+    max-width: 500px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.save-slot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.save-slot-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.save-slot-close {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.save-slot-close:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.save-slots-list {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.save-slot-item {
+    padding: 16px 20px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-slot-item:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.save-slot-item.empty {
+    border-style: dashed;
+}
+
+.save-slot-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.slot-number {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.slot-info {
+    display: flex;
+    gap: 16px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.slot-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.slot-action {
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-top: 8px;
+}
+
+/* ========== 卡组管理面板 ========== */
+.deck-manager-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
+    z-index: 1002;
+    display: none;
+    overflow: hidden;
+}
+
+.deck-manager-panel.show {
+    display: block;
+}
+
+.deck-manager-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.deck-manager-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.deck-manager-close {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.deck-manager-close:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.deck-manager-body {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.current-deck-section, .available-cards-section {
+    flex: 1;
+}
+
+.current-deck-section h3, .available-cards-section h3 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.current-deck-cards, .available-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 45vh;
+    overflow-y: auto;
+}
+
+.deck-card-item, .available-card-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.deck-card-item:hover, .available-card-item:hover {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.deck-card-item.rarity-common {
+    border-left: 3px solid #64748b;
+}
+
+.deck-card-item.rarity-rare {
+    border-left: 3px solid #3b82f6;
+}
+
+.deck-card-item.rarity-epic {
+    border-left: 3px solid #8b5cf6;
+}
+
+.deck-card-item.rarity-legendary {
+    border-left: 3px solid #fbbf24;
+}
+
+.card-cost {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.card-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.card-effect {
+    font-size: 0.75rem;
+    color: var(--accent);
+}
+
+.card-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.remove-card-btn {
+    width: 24px;
+    height: 24px;
+    background: rgba(239, 68, 68, 0.1);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-card-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+/* ========== 自定义卡组对话框 ========== */
+.custom-deck-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1003;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-deck-dialog.show {
+    display: flex;
+}
+
+.custom-deck-content {
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.custom-deck-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.custom-deck-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.custom-deck-close {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.custom-deck-close:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.custom-deck-form {
+    padding: 20px;
+}
+
+.custom-deck-form input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.custom-deck-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.custom-deck-form input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.custom-deck-cards {
+    margin-bottom: 16px;
+}
+
+.custom-deck-cards p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.card-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+}
+
+.card-selector-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card-selector-item:hover {
+    border-color: var(--accent);
+}
+
+.card-selector-item.selected {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.selected-cards-count {
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.selected-cards-count span {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.btn-create-deck {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-create-deck:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+/* ========== 背包内容样式 ========== */
+.inventory-content {
+    padding: 20px;
+}
+
+.inventory-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+}
+
+.inv-stat {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.inventory-deck h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.deck-cards-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.deck-card-mini {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-size: 0.75rem;
+}
+
+.deck-card-mini.rarity-common {
+    border-color: #64748b;
+}
+
+.deck-card-mini.rarity-rare {
+    border-color: #3b82f6;
+}
+
+.deck-card-mini.rarity-epic {
+    border-color: #8b5cf6;
+}
+
+.deck-card-mini.rarity-legendary {
+    border-color: #fbbf24;
+}
+
+.mini-cost {
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: white;
+}
+
+.mini-name {
+    color: var(--text-primary);
+}
+
+.mini-amount {
+    font-size: 0.6875rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.card-amount {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+}
+
+.card-count-badge {
+    display: none;
+    min-width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 9px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.selected-preview-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.preview-card-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preview-card-item:hover {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.preview-card-item .card-cost {
+    width: 20px;
+    height: 20px;
+    font-size: 0.6875rem;
+}
+
+.preview-card-item .card-name {
+    font-size: 0.75rem;
+}
+
+.preview-card-item .card-amount {
+    font-size: 0.6875rem;
+}
+
+.preview-card-item .remove-hint {
+    width: 16px;
+    height: 16px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #ef4444;
+}
+
+/* ========== 自定义卡组列表 ========== */
+.custom-decks-list {
+    min-height: 60px;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 8px;
+}
+
+.custom-deck-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.custom-deck-item:last-child {
+    margin-bottom: 0;
+}
+
+.custom-deck-item:hover {
+    border-color: var(--accent);
+}
+
+.custom-deck-item.selected {
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.custom-deck-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-deck-icon {
+    font-size: 1.5rem;
+}
+
+.custom-deck-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.custom-deck-count {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 2px 8px;
+    background: var(--bg-card);
+    border-radius: 10px;
+}
+
+.custom-deck-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.custom-deck-select-btn, .custom-deck-delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.custom-deck-select-btn {
+    background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.custom-deck-select-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.custom-deck-delete-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.custom-deck-delete-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+/* ========== 完整响应式设计 ========== */
+
+/* 大屏幕电脑 (1200px+) */
+@media (min-width: 1200px) {
+    .dungeon-home {
+        max-width: 1400px;
+    }
+    
+    .class-grid-new {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .deck-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .map-room {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .battle-card {
+        min-width: 140px;
+        max-width: 160px;
+    }
+}
+
+/* 中等屏幕电脑和平板横屏 (900px - 1199px) */
+@media (max-width: 1199px) and (min-width: 900px) {
+    .class-grid-new {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .deck-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .reward-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .victory-stats, .gameover-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 平板和小屏幕电脑 (600px - 899px) */
+@media (max-width: 899px) and (min-width: 600px) {
+    .dungeon-home {
+        padding: 24px;
+    }
+    
+    .mode-grid-new {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .class-grid-new {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .deck-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .reward-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .camp-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .shop-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .victory-stats, .gameover-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .victory-actions, .gameover-actions {
+        flex-direction: column;
+    }
+    
+    .map-room {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .room-icon {
+        font-size: 1.5rem;
+    }
+    
+    .room-name {
+        font-size: 0.625rem;
+    }
+    
+    .battle-hand {
+        gap: 8px;
+    }
+    
+    .battle-card {
+        min-width: 100px;
+        max-width: 120px;
+    }
+    
+    .deck-manager-body {
+        flex-direction: column;
+    }
+    
+    .game-menu-panel {
+        width: 200px;
+        right: 10px;
+    }
+}
+
+/* 手机 (400px - 599px) */
+@media (max-width: 599px) and (min-width: 400px) {
+    .dungeon-home {
+        padding: 16px;
+    }
+    
+    .section-title-new {
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+    }
+    
+    .mode-grid-new {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .mode-card-new {
+        padding: 20px;
+    }
+    
+    .mode-card-new h3 {
+        font-size: 1.125rem;
+    }
+    
+    .class-grid-new {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .class-card-new {
+        padding: 16px;
+    }
+    
+    .deck-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .deck-card {
+        padding: 16px;
+    }
+    
+    .deck-card-icon {
+        font-size: 2rem;
+    }
+    
+    .reward-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .reward-container, .victory-container, .gameover-container {
+        padding: 24px;
+        width: 95%;
+    }
+    
+    .camp-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .shop-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .victory-stats, .gameover-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .victory-actions, .gameover-actions {
+        flex-direction: column;
+    }
+    
+    .map-floor {
+        padding: 12px;
+    }
+    
+    .floor-rooms {
+        gap: 10px;
+    }
+    
+    .map-room {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .room-icon {
+        font-size: 1.25rem;
+    }
+    
+    .room-name {
+        font-size: 0.5625rem;
+    }
+    
+    .battle-header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .hp-bar {
+        width: 120px;
+    }
+    
+    .battle-hand {
+        padding: 12px;
+        gap: 6px;
+    }
+    
+    .battle-card {
+        min-width: 85px;
+        max-width: 100px;
+    }
+    
+    .battle-card .card-word {
+        font-size: 0.75rem;
+    }
+    
+    .battle-actions {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .btn-action {
+        padding: 10px 20px;
+        font-size: 0.875rem;
+    }
+    
+    .game-menu-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.25rem;
+        top: 70px;
+        right: 10px;
+    }
+    
+    .game-menu-panel {
+        width: 180px;
+        right: 10px;
+        top: 120px;
+    }
+    
+    .menu-item-btn {
+        padding: 10px 12px;
+        font-size: 0.875rem;
+    }
+    
+    .inventory-panel, .deck-manager-panel, .custom-deck-content, .save-slot-content {
+        width: 95%;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+    
+    .inventory-header, .deck-manager-header, .custom-deck-header, .save-slot-header {
+        padding: 16px;
+    }
+    
+    .inventory-header h3, .deck-manager-header h2, .custom-deck-header h3, .save-slot-header h3 {
+        font-size: 1.125rem;
+    }
+    
+    .deck-manager-body {
+        flex-direction: column;
+        padding: 12px;
+    }
+    
+    .card-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .deck-card-item, .available-card-item {
+        padding: 8px 10px;
+    }
+    
+    .card-cost {
+        width: 20px;
+        height: 20px;
+        font-size: 0.625rem;
+    }
+    
+    .card-name {
+        font-size: 0.75rem;
+    }
+    
+    .custom-decks-list {
+        padding: 8px;
+    }
+    
+    .custom-deck-item {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .custom-deck-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .market-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .market-card {
+        padding: 12px;
+    }
+    
+    .market-card-word {
+        font-size: 1rem;
+    }
+    
+    .battle-log {
+        max-height: 80px;
+        font-size: 0.75rem;
+    }
+}
+
+/* 小屏幕手机 (400px以下) */
+@media (max-width: 399px) {
+    .dungeon-home {
+        padding: 12px;
+    }
+    
+    .section-title-new {
+        font-size: 1.125rem;
+        margin-bottom: 12px;
+    }
+    
+    .mode-grid-new {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .mode-card-new {
+        padding: 16px;
+        border-radius: 12px;
+    }
+    
+    .mode-card-new h3 {
+        font-size: 1rem;
+    }
+    
+    .mode-card-new p {
+        font-size: 0.75rem;
+    }
+    
+    .class-grid-new {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .class-card-new {
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .class-icon-new {
+        font-size: 2rem;
+    }
+    
+    .class-name-new {
+        font-size: 0.9375rem;
+    }
+    
+    .deck-selection-section {
+        padding: 16px;
+        margin-top: 24px;
+    }
+    
+    .deck-selection-title {
+        font-size: 1.125rem;
+    }
+    
+    .deck-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .deck-card {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .deck-card-icon {
+        font-size: 1.75rem;
+        margin-bottom: 8px;
+    }
+    
+    .deck-card-name {
+        font-size: 0.875rem;
+    }
+    
+    .deck-card-desc {
+        font-size: 0.75rem;
+    }
+    
+    .deck-card-count {
+        font-size: 0.6875rem;
+    }
+    
+    .reward-container, .victory-container, .gameover-container {
+        padding: 16px;
+        width: 96%;
+        border-radius: 16px;
+    }
+    
+    .reward-title, .victory-title, .gameover-title {
+        font-size: 1.25rem;
+    }
+    
+    .reward-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .reward-option {
+        padding: 16px;
+    }
+    
+    .reward-icon {
+        font-size: 1.5rem;
+    }
+    
+    .camp-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .camp-option {
+        padding: 16px;
+    }
+    
+    .camp-option .option-icon {
+        font-size: 2rem;
+    }
+    
+    .shop-items {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .shop-item {
+        padding: 12px;
+    }
+    
+    .item-icon {
+        font-size: 1.5rem;
+    }
+    
+    .victory-stats, .gameover-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .stat-item {
+        padding: 12px;
+    }
+    
+    .stat-item .stat-value {
+        font-size: 1.25rem;
+    }
+    
+    .victory-actions, .gameover-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-victory, .btn-gameover {
+        padding: 12px;
+        font-size: 0.875rem;
+    }
+    
+    .map-path {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .map-floor {
+        padding: 10px;
+        border-radius: 12px;
+    }
+    
+    .floor-label {
+        font-size: 0.8125rem;
+        padding: 4px 12px;
+    }
+    
+    .floor-rooms {
+        gap: 8px;
+    }
+    
+    .map-room {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+    }
+    
+    .room-icon {
+        font-size: 1.125rem;
+        margin-bottom: 2px;
+    }
+    
+    .room-name {
+        font-size: 0.5rem;
+    }
+    
+    .battle-header {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+    
+    .player-info, .enemy-info {
+        flex-direction: row;
+        gap: 8px;
+    }
+    
+    .player-avatar, .enemy-avatar {
+        font-size: 1.5rem;
+    }
+    
+    .hp-bar {
+        width: 100px;
+        height: 8px;
+    }
+    
+    .hp-text {
+        font-size: 0.6875rem;
+    }
+    
+    .energy-display {
+        font-size: 0.875rem;
+    }
+    
+    .battle-hand {
+        padding: 8px;
+        gap: 4px;
+    }
+    
+    .battle-card {
+        min-width: 70px;
+        max-width: 85px;
+        border-radius: 8px;
+    }
+    
+    .battle-card .card-cost {
+        width: 18px;
+        height: 18px;
+        font-size: 0.5625rem;
+    }
+    
+    .battle-card .card-word {
+        font-size: 0.625rem;
+    }
+    
+    .battle-card .card-effect {
+        font-size: 0.5rem;
+    }
+    
+    .battle-actions {
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px;
+    }
+    
+    .btn-action {
+        padding: 8px 16px;
+        font-size: 0.8125rem;
+        border-radius: 8px;
+    }
+    
+    .game-menu-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.125rem;
+        top: 65px;
+        right: 8px;
+        border-radius: 50%;
+    }
+    
+    .game-menu-panel {
+        width: 160px;
+        right: 8px;
+        top: 110px;
+        border-radius: 12px;
+    }
+    
+    .menu-panel-header {
+        padding: 10px 12px;
+    }
+    
+    .menu-panel-header span {
+        font-size: 0.875rem;
+    }
+    
+    .menu-item-btn {
+        padding: 8px 10px;
+        font-size: 0.8125rem;
+        gap: 8px;
+    }
+    
+    .menu-icon {
+        font-size: 1rem;
+    }
+    
+    .inventory-panel, .deck-manager-panel, .custom-deck-content, .save-slot-content {
+        width: 96%;
+        max-height: 92vh;
+        border-radius: 12px;
+    }
+    
+    .inventory-header, .deck-manager-header, .custom-deck-header, .save-slot-header {
+        padding: 12px;
+    }
+    
+    .inventory-header h3, .deck-manager-header h2, .custom-deck-header h3, .save-slot-header h3 {
+        font-size: 1rem;
+    }
+    
+    .inventory-close-btn, .deck-manager-close, .custom-deck-close, .save-slot-close {
+        width: 28px;
+        height: 28px;
+        font-size: 1.25rem;
+    }
+    
+    .inventory-content, .deck-manager-body {
+        padding: 12px;
+    }
+    
+    .inventory-stats {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .inv-stat {
+        font-size: 0.75rem;
+    }
+    
+    .deck-manager-body {
+        flex-direction: column;
+    }
+    
+    .current-deck-section h3, .available-cards-section h3 {
+        font-size: 0.8125rem;
+    }
+    
+    .deck-card-item, .available-card-item {
+        padding: 6px 8px;
+        gap: 6px;
+    }
+    
+    .card-cost {
+        width: 18px;
+        height: 18px;
+        font-size: 0.5625rem;
+    }
+    
+    .card-name {
+        font-size: 0.6875rem;
+    }
+    
+    .card-desc {
+        font-size: 0.625rem;
+    }
+    
+    .remove-card-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 0.875rem;
+    }
+    
+    .custom-deck-form {
+        padding: 12px;
+    }
+    
+    .custom-deck-form input {
+        padding: 10px 12px;
+        font-size: 0.875rem;
+        margin-bottom: 10px;
+    }
+    
+    .card-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        padding: 8px;
+        max-height: 30vh;
+    }
+    
+    .card-selector-item {
+        padding: 6px 8px;
+        gap: 4px;
+    }
+    
+    .card-selector-item .card-cost {
+        width: 16px;
+        height: 16px;
+        font-size: 0.5rem;
+    }
+    
+    .card-selector-item .card-name {
+        font-size: 0.625rem;
+    }
+    
+    .card-count-badge {
+        min-width: 14px;
+        height: 14px;
+        font-size: 0.5rem;
+    }
+    
+    .selected-cards-count {
+        font-size: 0.8125rem;
+        margin-bottom: 12px;
+    }
+    
+    .btn-create-deck {
+        padding: 12px;
+        font-size: 0.875rem;
+    }
+    
+    .custom-decks-list {
+        padding: 8px;
+    }
+    
+    .custom-deck-item {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    .custom-deck-info {
+        gap: 8px;
+    }
+    
+    .custom-deck-icon {
+        font-size: 1.25rem;
+    }
+    
+    .custom-deck-name {
+        font-size: 0.8125rem;
+    }
+    
+    .custom-deck-count {
+        font-size: 0.625rem;
+        padding: 2px 6px;
+    }
+    
+    .custom-deck-actions {
+        width: 100%;
+        gap: 6px;
+    }
+    
+    .custom-deck-select-btn, .custom-deck-delete-btn {
+        flex: 1;
+        padding: 6px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .save-slots-list {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .save-slot-item {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .slot-number {
+        font-size: 0.75rem;
+    }
+    
+    .slot-info {
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.75rem;
+    }
+    
+    .slot-time {
+        font-size: 0.625rem;
+    }
+    
+    .slot-action {
+        font-size: 0.625rem;
+    }
+    
+    .market-section {
+        padding: 12px;
+    }
+    
+    .market-header {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .market-title {
+        font-size: 1.125rem;
+    }
+    
+    .market-score {
+        padding: 6px 12px;
+    }
+    
+    .market-score-value {
+        font-size: 1rem;
+    }
+    
+    .market-refresh-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px;
+    }
+    
+    .market-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .market-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .market-card-word {
+        font-size: 0.9375rem;
+    }
+    
+    .market-card-phonetic {
+        font-size: 0.75rem;
+    }
+    
+    .market-card-effect {
+        padding: 8px;
+    }
+    
+    .market-card-effect-name {
+        font-size: 0.75rem;
+    }
+    
+    .market-card-effect-desc {
+        font-size: 0.625rem;
+    }
+    
+    .market-card-price {
+        padding: 8px;
+        font-size: 0.875rem;
+    }
+    
+    .battle-log {
+        max-height: 60px;
+        font-size: 0.6875rem;
+        padding: 8px;
+    }
+    
+    .log-entry {
+        margin-bottom: 4px;
+    }
+    
+    .special-content {
+        padding: 16px;
+    }
+    
+    .special-question {
+        font-size: 1rem;
+    }
+    
+    .special-input {
+        padding: 10px 12px;
+        font-size: 0.875rem;
+    }
+    
+    .special-options {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .special-option {
+        padding: 10px;
+        font-size: 0.875rem;
+    }
+    
+    .special-result {
+        padding: 16px;
+    }
+    
+    .special-result p {
+        font-size: 0.875rem;
+    }
+    
+    .btn-action {
+        padding: 10px 16px;
+        font-size: 0.8125rem;
+    }
+}
+
+/* 横屏模式优化 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .dungeon-home {
+        padding-top: 60px;
+    }
+    
+    .battle-screen-new {
+        flex-direction: row;
+    }
+    
+    .battle-header {
+        flex-direction: row;
+        width: auto;
+    }
+    
+    .battle-hand {
+        max-height: 40vh;
+    }
+    
+    .battle-log {
+        max-height: 60px;
+    }
+    
+    .reward-container, .victory-container, .gameover-container {
+        max-height: 90vh;
+    }
+    
+    .map-path {
+        flex-direction: row;
+        overflow-x: auto;
+        max-height: 70vh;
+    }
+    
+    .map-floor {
+        min-width: 200px;
+        flex-shrink: 0;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .mode-card-new:hover,
+    .class-card-new:hover,
+    .deck-card:hover,
+    .map-room:hover,
+    .battle-card:hover,
+    .reward-option:hover,
+    .shop-item:hover,
+    .camp-option:hover,
+    .menu-item-btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .mode-card-new:active,
+    .class-card-new:active,
+    .deck-card:active,
+    .map-room:active,
+    .battle-card:active,
+    .reward-option:active,
+    .shop-item:active,
+    .camp-option:active,
+    .menu-item-btn:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+    
+    .btn-action:active,
+    .btn-victory:active,
+    .btn-gameover:active,
+    .btn-create-deck:active {
+        transform: scale(0.98);
+    }
+}
+
+/* 高分辨率屏幕 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .battle-card,
+    .map-room,
+    .mode-card-new,
+    .class-card-new {
+        border-width: 0.5px;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .game-menu-btn,
+    .game-menu-panel,
+    .sound-indicator {
+        display: none !important;
+    }
+    
+    .dungeon-container {
+        height: auto;
+        overflow: visible;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #0f0f1a;
+        --bg-secondary: #1a1a2e;
+        --bg-card: #16213e;
+        --bg-tertiary: #1a1a2e;
+    }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
